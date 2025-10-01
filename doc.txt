@@ -1,11 +1,21 @@
 O que é o Simulated Annealing e como ele funciona?
-O Simulated Annealing (ou Recozimento Simulado) é uma meta-heurística de otimização, inspirada no processo de recozimento da metalurgia.
+O Simulated Annealing (ou Recozimento Simulado) é uma meta-heurística de otimização, 
+inspirada no processo de recozimento da metalurgia.
 
-A Analogia: Na metalurgia, o recozimento envolve aquecer um metal a uma alta temperatura e depois resfriá-lo lentamente. Esse processo lento permite que os átomos se organizem em uma estrutura de cristal quase perfeita, que corresponde a um estado de mínima energia (tornando o metal mais forte). Se o metal fosse resfriado rapidamente, defeitos ficariam "congelados" na sua estrutura, resultando em um estado de energia mais alto (e um metal mais frágil).
+A Analogia: Na metalurgia, o recozimento envolve aquecer um metal a uma alta temperatura 
+e depois resfriá-lo lentamente. Esse processo lento permite que os átomos se organizem 
+em uma estrutura de cristal quase perfeita, que corresponde a um estado de mínima energia 
+(tornando o metal mais forte). Se o metal fosse resfriado rapidamente, defeitos ficariam 
+"congelados" na sua estrutura, resultando em um estado de energia mais alto 
+(e um metal mais frágil).
 
-No mundo da otimização, o "custo" de uma solução é análogo à "energia" de um estado do metal. Queremos encontrar a solução com o menor custo possível.
+No mundo da otimização, o "custo" de uma solução é análogo à "energia" de um estado do metal.
+Queremos encontrar a solução com o menor custo possível.
 
-O grande problema em muitas buscas de otimização é ficar preso em um "ótimo local". Imagine que você está tentando descer de uma montanha no escuro e a regra é "sempre dar um passo para baixo". Você pode acabar em um pequeno vale (um ótimo local), mas não no ponto mais baixo de toda a região (o ótimo global).
+O grande problema em muitas buscas de otimização é ficar preso em um "ótimo local". 
+Imagine que você está tentando descer de uma montanha no escuro e a regra é 
+"sempre dar um passo para baixo". Você pode acabar em um pequeno vale (um ótimo local), 
+mas não no ponto mais baixo de toda a região (o ótimo global).
 
 O Simulated Annealing resolve isso de forma inteligente.
 
@@ -14,11 +24,13 @@ Inicialização (O Metal está Quente):
 
 Começamos com uma solução qualquer, gerada aleatoriamente.
 
-Definimos uma temperatura inicial alta. Essa "temperatura" é apenas um número que controla a probabilidade de tomar decisões "ruins".
+Definimos uma temperatura inicial alta. Essa "temperatura" é apenas um número que 
+controla a probabilidade de tomar decisões "ruins".
 
 Geração de um Vizinho (Perturbação):
 
-A partir da nossa solução atual, fazemos uma pequena mudança aleatória para criar uma nova solução, chamada de "vizinha". Por exemplo, se a solução é uma rota de viagem, podemos trocar a ordem de duas cidades.
+A partir da nossa solução atual, fazemos uma pequena mudança aleatória para criar uma nova solução, 
+chamada de "vizinha". Por exemplo, se a solução é uma rota de viagem, podemos trocar a ordem de duas cidades.
 
 Avaliação e Decisão (O Coração do Algoritmo):
 
@@ -30,24 +42,30 @@ Caso 1: A solução vizinha é MELHOR (delta_custo < 0).
 
 Caso 2: A solução vizinha é PIOR (delta_custo > 0).
 
-Aqui está a mágica! Em vez de rejeitar imediatamente, nós PODEMOS aceitá-la. A probabilidade de aceitar uma solução pior é dada pela fórmula: P=e 
-−ΔCusto/Temperatura
- .
+Aqui está a mágica! Em vez de rejeitar imediatamente, nós PODEMOS aceitá-la. A probabilidade 
+de aceitar uma solução pior é dada pela fórmula: P = e − ΔCusto/Temperatura.
 
-Quando a Temperatura é ALTA: A probabilidade de aceitar um movimento ruim é maior. Isso permite que o algoritmo "salte para fora" de ótimos locais e explore outras áreas do espaço de busca. É a fase de exploração.
+Quando a Temperatura é ALTA: A probabilidade de aceitar um movimento ruim é maior. 
+Isso permite que o algoritmo "salte para fora" de ótimos locais e explore outras 
+áreas do espaço de busca. É a fase de exploração.
 
-Quando a Temperatura é BAIXA: A probabilidade de aceitar um movimento ruim é muito pequena. O algoritmo se torna mais "ganancioso", aceitando principalmente movimentos que melhoram a solução. É a fase de refinamento (ou explotação).
+Quando a Temperatura é BAIXA: A probabilidade de aceitar um movimento ruim é muito pequena. 
+O algoritmo se torna mais "ganancioso", aceitando principalmente movimentos que melhoram 
+a solução. É a fase de refinamento (ou explotação).
 
 Resfriamento:
+Após um certo número de iterações, nós diminuímos a temperatura um pouco 
+(geralmente multiplicando por um fator como 0.99, a taxa_resfriamento).
 
-Após um certo número de iterações, nós diminuímos a temperatura um pouco (geralmente multiplicando por um fator como 0.99, a taxa_resfriamento).
-
-Isso simula o resfriamento lento do metal, fazendo com que o algoritmo aceite cada vez menos movimentos ruins à medida que avança.
+Isso simula o resfriamento lento do metal, fazendo com que o algoritmo aceite 
+cada vez menos movimentos ruins à medida que avança.
 
 Critério de Parada:
-
-O algoritmo repete os passos 2, 3 e 4 até que a temperatura atinja um valor mínimo (o sistema está "congelado") ou outro critério de parada seja satisfeito.
+O algoritmo repete os passos 2, 3 e 4 até que a temperatura atinja um valor mínimo 
+(o sistema está "congelado") ou outro critério de parada seja satisfeito.
 
 A melhor solução encontrada durante todo o processo é retornada como a resposta final.
 
-Resumindo, o Simulated Annealing é um algoritmo poderoso que equilibra de forma inteligente a exploração de novas áreas do espaço de soluções (aceitando movimentos piores) com o refinamento das boas soluções já encontradas.
+Resumindo, o Simulated Annealing é um algoritmo poderoso que equilibra de forma 
+inteligente a exploração de novas áreas do espaço de soluções (aceitando movimentos piores) 
+com o refinamento das boas soluções já encontradas.
